@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Standings 📊</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom, #0d47a1, #1565c0, #1976d2, #64b5f6);
+      color: #ffffff;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    header {
+      padding: 20px 0;
+      background-color: #1565c0;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+    }
+
+    header h1 .live-icon {
+      font-size: 1.5rem;
+      margin-left: 8px;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        color: #ff3d00;
+      }
+      50% {
+        transform: scale(1.2);
+        color: #ff6e40;
+      }
+    }
+
+    header nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    header nav a {
+      text-decoration: none;
+      color: #ffffff;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 20px;
+      background: #42a5f5;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      position: relative;
+    }
+
+    header nav a::before {
+      content: "🌐";
+      margin-right: 8px;
+    }
+
+    header nav a[href="#division1"]::before {
+      content: "🏆";
+    }
+
+    header nav a[href="#division2"]::before {
+      content: "🥈";
+    }
+
+    header nav a[href="#rules"]::before {
+      content: "📜";
+    }
+
+    header nav a:hover {
+      transform: translateY(-5px);
+      background-color: #1976d2;
+    }
+
+    .content {
+      padding: 20px;
+    }
+
+    .division {
+      margin: 30px auto;
+      max-width: 90%;
+      background: #ffffff;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      padding: 20px;
+      color: #333;
+    }
+
+    .division h2 {
+      margin: 20px 0;
+      font-size: 2rem;
+      color: #1565c0;
+      position: relative;
+    }
+
+    .division h2::after {
+      content: "🏆";
+      position: absolute;
+      right: -30px;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    iframe {
+      width: 100%;
+      height: 500px;
+      border: none;
+      border-radius: 10px;
+    }
+
+    .rules {
+      margin: 20px auto;
+      max-width: 90%;
+      padding: 20px;
+      background: #42a5f5;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      animation: fadeIn 1.5s ease;
+      position: relative;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .rules h2 {
+      color: #ffffff;
+      font-size: 2rem;
+      position: relative;
+    }
+
+    .rules h2::before {
+      content: "📜";
+      position: absolute;
+      left: -30px;
+    }
+
+    .rules p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: #f0f0f0;
+    }
+
+    .rules p::before {
+      content: "✨ ";
+    }
+
+    .center-trophy {
+      font-size: 5rem;
+      margin: 40px 0;
+      animation: bounce-center 2s infinite;
+      color: gold;
+    }
+
+    @keyframes bounce-center {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    footer {
+      padding: 10px;
+      background-color: #1565c0;
+      box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+      color: #ffffff;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 1.5rem;
+      }
+
+      header nav a {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+      }
+
+      .rules p {
+        font-size: 1rem;
+      }
+
+      iframe {
+        height: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>
+      Live Standings <span class="live-icon">🔴</span>
+    </h1>
+    <nav>
+        <a href="#division1">Division 1</a>
+        <a href="#division2">Division 2</a>
+        <a href="#rules">Rules</a>
+    </nav>
+  </header>
+
+  <div class="center-trophy">🏆</div>
+
+  <div class="content">
+    <div class="division" id="division1">
+      <h2>Division 1</h2>
+      <iframe src="https://challonge.com/cpd_cup_Div_1/module" allowtransparency="true"></iframe>
+    </div>
+
+    <div class="division" id="division2">
+      <h2>Division 2</h2>
+      <iframe src="https://challonge.com/csec_cpd_cup_div2/module" allowtransparency="true"></iframe>
+    </div>
+  </div>
+  <div class="rules" id="rules">
+    <h2>📜 Match Rules & Process</h2>
+    <p>📍 Round 1: 16 participants compete to secure the Top 8 quarterfinalists.<br>
+    📍 Quarterfinals: Top 8 compete to determine the Top 4 semifinalists.<br>
+    📍 Semifinals: Top 4 battle to reach the Top 2 Finalists.<br>
+    🏆 Finals: The Top 2 finalists compete for the championship, while semifinal losers face off to secure Third Place 🥉.</p>
+    <p>🕔 Each round lasts 10 minutes.<br>
+    ❔ One problem is given in each round.<br>
+    🥇 The first solver from each pair advances to the next stage.</p>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 CSEC CPD CUP | May the best coder win! 🎉</p>
+  </footer>
+</body>
+</html>
